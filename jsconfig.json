@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "target": "es6",
+    "baseUrl": ".",
+    "incremental": true,
+    "paths": {
+      "pages/*": ["src/pages/*"],
+      "configs/*": ["src/configs/*"],
+      "configs": ["src/configs/index"],
+      "utils/*": ["src/utils/*"],
+      "utils": ["src/utils/index"],
+      "store/*": ["src/store/*"],
+      "store": ["src/store/index"],
+      "styles/*": ["src/styles/*"],
+      "images/*": ["src/images/*"],
+      "components/*": ["src/components/*"],
+      "services/*": ["src/services/*"],
+      "services": ["src/services/index"],
+      "lib/*": ["src/lib/*"],
+      "testUtils": ["__tests__/testUtils"]
+    }
+  },
+  "include": ["**/*.js", "src/**/*.js"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "build",
+    ".vscode",
+    ".next",
+    "coverage",
+    ".npm",
+    ".yarn"
+  ],
+  "typeAcquisition": {
+    "enable": true,
+    "include": ["react", "react-dom"]
+  }
+}
