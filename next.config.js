@@ -5,11 +5,14 @@ const localeSubpaths = {
   en: 'en',
 };
 
+const { i18n } = require('./next-i18next.config');
+
 const nextConfig = {
   poweredByHeader: false,
   publicRuntimeConfig: {
     localeSubpaths,
   },
+  i18n,
   generateBuildId: async () => {
     return pjson.version;
   },

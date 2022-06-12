@@ -1,24 +1,27 @@
 module.exports = {
   root: true,
+  parser: '@babel/eslint-parser',
   env: {
     browser: true,
-    es2021: true,
+    es2020: true,
+    node: true,
+    jest: true,
   },
-  extends: ['next/core-web-vitals', 'plugin:react/recommended'],
+  extends: [
+    'next',
+    'next/core-web-vitals',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:react/recommended',
+  ],
   parserOptions: {
-    requireConfigFile: false,
+    project: './jsconfig.json',
+    jsx: true,
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 'latest',
+    ecmaVersion: 2020,
     sourceType: 'module',
-    babelOptions: {
-      presets: ['next/babel'],
-      caller: {
-        // Eslint supports top level await when a parser for it is included. We enable the parser by default for Babel.
-        supportsTopLevelAwait: true,
-      },
-    },
   },
   settings: {
     react: {
@@ -26,9 +29,11 @@ module.exports = {
     },
     'import/internal-regex': '^next/',
   },
-  plugins: ['react', 'react-hooks', 'jest', 'import'],
+  plugins: ['react', 'react-hooks', 'import'],
   rules: {
-    indent: ['error', 2],
+    'import/no-unresolved': [0],
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],

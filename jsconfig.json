@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -12,9 +13,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "target": "es6",
     "baseUrl": ".",
-    "incremental": true,
     "paths": {
       "pages/*": ["src/pages/*"],
       "configs/*": ["src/configs/*"],
@@ -30,9 +29,10 @@
       "services": ["src/services/index"],
       "lib/*": ["src/lib/*"],
       "testUtils": ["__tests__/testUtils"]
-    }
+    },
+    "incremental": true
   },
-  "include": ["**/*.js", "src/**/*.js"],
+  "include": ["**/*.js", "src/**/*.js", "**/*.jsx"],
   "exclude": [
     "dist",
     "node_modules",

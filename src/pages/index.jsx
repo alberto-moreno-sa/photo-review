@@ -1,8 +1,14 @@
+import { cacheConfig } from 'configs';
+import { wrapper } from 'store/store';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'services/TranslationService';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from 'styles/Home.module.css';
 
 export default function Home() {
+  const { t } = useTranslation('common');
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,6 +19,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
+          {t('hello')}
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
@@ -67,3 +74,16 @@ export default function Home() {
     </div>
   );
 }
+
+export const getStaticProps = wrapper.getStaticProps(
+  store =>
+    async ({ locale }) => {
+      console.log(locale);
+      return {
+        revalidate: cacheConfig,
+        props: {
+          ...(await serverSideTranslations(locale, ['common'])),
+        },
+      };
+    }
+);
