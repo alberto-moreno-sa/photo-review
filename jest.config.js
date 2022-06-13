@@ -10,8 +10,11 @@ module.exports = {
     '<rootDir>/.next/',
     '/node_modules/(?!lodash-es).+\\.js$',
   ],
-  transformIgnorePatterns: ['<rootDir>/node_modules/camelcase-keys/index'],
-  testEnvironment: 'jsdom',
+  transformIgnorePatterns: [
+    '/node_modules/',
+    '^.+\\.module\\.(css|sass|scss)$',
+  ],
+  testEnvironment: 'jest-environment-jsdom',
   moduleFileExtensions: ['js', 'jsx'],
   testMatch: ['<rootDir>/__tests__/**/?(*.)(spec|test).{js,jsx,mjs}'],
   transform: {

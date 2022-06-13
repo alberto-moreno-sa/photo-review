@@ -36,7 +36,7 @@ const Review = ({ photo = null, onClick = () => null }) => {
         <ImageWrapper>
           {photo && Object.keys(photo).length > 0 ? (
             <Image
-              data-testid={`photo-${photo.id}`}
+              data-testid={'photo'}
               src={photo.urls.regular}
               alt={photo.altDescription}
             />
