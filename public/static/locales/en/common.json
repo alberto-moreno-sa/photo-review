@@ -1,3 +1,10 @@
 {
-  "hello": "world"
+  "title": "Imagen Approval Application",
+  "galleryImage": {
+    "title": "Approved Images ({{count}})"
+  },
+  "review": {
+    "approve": "Approve",
+    "reject": "Reject"
+  }
 }

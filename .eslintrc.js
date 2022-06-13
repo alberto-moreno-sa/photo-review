@@ -31,6 +31,7 @@ module.exports = {
   },
   plugins: ['react', 'react-hooks', 'import'],
   rules: {
+    'import/no-anonymous-default-export': [0],
     'import/no-unresolved': [0],
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',

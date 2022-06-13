@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import packageInfo from './../../package.json';
 import { enviroment } from 'configs';
-import { isServer } from 'utils';
+import { Util } from 'utils';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import thunkMiddleware from 'redux-thunk';
@@ -24,6 +24,29 @@ export const InitialState = {
 
 export const reducer = (state = InitialState, action) => {
   if (action.type === HYDRATE) {
+    if (!Util.isServer()) {
+      const persistedState = localStorage.getItem(PERSIST_KEY);
+      if (persistedState !== null) {
+        try {
+          const persistedStateObj = JSON.parse(persistedState);
+          if (
+            Util.isEqualJSON(
+              action.payload.metadata,
+              persistedStateObj.metadata
+            ) &&
+            persistedStateObj.persistVersion === version
+          ) {
+            delete persistedStateObj.persistVersion;
+            state = { metadata: persistedStateObj.metadata };
+          } else {
+            state = { ...state, metadata: persistedStateObj.metadata };
+          }
+        } catch (error) {
+          console.error('Persist state error', error);
+        }
+      }
+    }
+
     let metadata = state.metadata;
     if (
       _.isUndefined(metadata) ||
@@ -68,7 +91,7 @@ const makeConfiguredStore = r =>
 export const makeStore = context => {
   store = makeConfiguredStore(reducer);
   store.subscribe(() => {
-    if (!isServer()) {
+    if (!Util.isServer()) {
       localStorage.setItem(
         PERSIST_KEY,
         JSON.stringify({ ...store.getState(), persistVersion: version })

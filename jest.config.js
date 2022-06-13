@@ -1,34 +1,41 @@
-// jest.config.js
-const nextJest = require('next/jest');
-
-const createJestConfig = nextJest({
-  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: './',
-});
-
-// Add any custom config to be passed to Jest
-const customJestConfig = {
-  // Add more setup options before each test is run
-  // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  // if using TypeScript with a baseUrl set to the root directory then you need the below for alias' to work
+module.exports = {
   collectCoverageFrom: [
-    '**/*.{js,jsx}',
+    '**/*.{js,jsx,ts,tsx}',
+    '!**/*.d.ts',
     '!**/node_modules/**',
-    '!**/coverage/**',
-    '!**/config/**',
-    '!jest.*',
-    '!next.config*',
-    '!**public/scripts**',
   ],
   setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
-  moduleDirectories: ['node_modules', '<rootDir>/'],
-  testEnvironment: 'jest-environment-jsdom',
-  testPathIgnorePatterns: ['/node_modules/', '/.next/', 'testUtils'],
-  transformIgnorePatterns: [
-    '/node_modules/',
-    '^.+\\.module\\.(css|sass|scss)$',
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/.next/',
+    '/node_modules/(?!lodash-es).+\\.js$',
   ],
+  transformIgnorePatterns: ['<rootDir>/node_modules/camelcase-keys/index'],
+  testEnvironment: 'jsdom',
+  moduleFileExtensions: ['js', 'jsx'],
+  testMatch: ['<rootDir>/__tests__/**/?(*.)(spec|test).{js,jsx,mjs}'],
+  transform: {
+    '.+\\.(css|styl|less|sass|scss)$':
+      '<rootDir>/node_modules/jest-css-modules-transform',
+    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
+  },
+  moduleNameMapper: {
+    // Handle CSS imports (with CSS modules)
+    // https://jestjs.io/docs/webpack#mocking-css-modules
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '^~(.*)$': '<rootDir>/src$1',
+    '^pages/(.*)$': '<rootDir>/src/pages/$1',
+    '^configs/(.*)$': '<rootDir>/src/configs/$1',
+    '^configs$': '<rootDir>/src/configs/index',
+    '^utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^utils$': '<rootDir>/src/utils/index',
+    '^store/(.*)$': '<rootDir>/src/store/$1',
+    '^store$': '<rootDir>/src/store/index',
+    '^components/(.*)$': '<rootDir>/src/components/$1',
+    '^services/(.*)$': '<rootDir>/src/services/$1',
+    '^services$': '<rootDir>/src/services/index',
+    '^services$': '<rootDir>/src/services/index',
+    '^mocks/(.*)': '<rootDir>/src/__mocks__/$1',
+    '^testUtils$': '<rootDir>/__tests__/testUtils',
+  },
 };
-
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-module.exports = createJestConfig(customJestConfig);

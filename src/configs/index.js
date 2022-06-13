@@ -8,3 +8,9 @@ export const logger = {
   env: 'local',
   serviceName: 'react.shop-ecommerce',
 };
+
+export const unsplash = {
+  apiUrl: 'https://api.unsplash.com',
+  apiVersion: 'v1',
+  accessKey: 'WaZ-wh-KtNrG2Eb173pbMDOJMs7SNKNbezV5bVYWu5M',
+};

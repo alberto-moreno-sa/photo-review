@@ -13,8 +13,12 @@ const nextConfig = {
     localeSubpaths,
   },
   i18n,
+  swcMinify: false, // disable swc because jenkis does no compatible
   generateBuildId: async () => {
     return pjson.version;
+  },
+  compiler: {
+    styledComponents: true,
   },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     if (!isServer) {

@@ -64,3 +64,5 @@ jest.mock('winston', () => ({
     };
   },
 }));
+
+jest.mock('camelcase-keys');

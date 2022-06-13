@@ -28,6 +28,7 @@
       "services/*": ["src/services/*"],
       "services": ["src/services/index"],
       "lib/*": ["src/lib/*"],
+      "mocks/*": ["src/__mocks__/*"],
       "testUtils": ["__tests__/testUtils"]
     },
     "incremental": true
