@@ -6,7 +6,7 @@ export const cacheConfig = 120;
 export const logger = {
   level: 'info',
   env: 'local',
-  serviceName: 'react.shop-ecommerce',
+  serviceName: 'photo-review',
 };
 
 export const unsplash = {
